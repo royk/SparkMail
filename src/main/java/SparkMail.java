@@ -19,7 +19,7 @@ public class SparkMail {
         this.mailPassword = password;
     }
 
-    public void sendMail(String to, String subject, ModelAndView body) throws Exception {
+    public void sendMail(String from, String to, String subject, ModelAndView body) throws Exception {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -35,7 +35,7 @@ public class SparkMail {
                 });
         try {
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(System.getenv("EMAIL_FROM")));
+            message.setFrom(new InternetAddress(from));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(to));
             message.setSubject(subject);
